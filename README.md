@@ -6,9 +6,14 @@
 ## supported websites
 1. jobsdb.com
 
+## add more keywords
+1. add keyword in keywords.yml
+
 ## setup
 
 1. `pip install -r requirements.txt`
+
+## run
 1. `python main.py`
 
 ## update requirements
