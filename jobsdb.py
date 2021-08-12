@@ -1,6 +1,8 @@
 from python_graphql_client import GraphqlClient
 
-endpoint = "https://xapi.supercharge-srp.co/job-search/graphql?country=th&isSmartSearch=false"
+endpoint = (
+    "https://xapi.supercharge-srp.co/job-search/graphql?country=th&isSmartSearch=true"
+)
 
 query = """
 query getLegacyJobs($country: String, $locale: String, $keyword: String, $createdAt: String, $jobFunctions: [Int], $categories: [String], $locations: [Int], $careerLevels: [Int], $minSalary: Int, $maxSalary: Int, $salaryType: Int, $candidateSalary: Int, $candidateSalaryCurrency: String, $datePosted: Int, $jobTypes: [Int], $workTypes: [String], $industries: [Int], $page: Int, $pageSize: Int, $companyId: String, $userAgent: String, $accNums: Int, $subAccount: Int, $minEdu: Int, $maxEdu: Int, $edus: [Int], $minExp: Int, $maxExp: Int, $seo: String, $searchFields: String, $candidateId: ID, $isDesktop: Boolean, $isCompanySearch: Boolean, $sort: String, $sVi: String, $duplicates: String, $flight: String, $solVisitorId: String) {
@@ -34,6 +36,6 @@ client = GraphqlClient(endpoint=endpoint)
 
 
 async def jobs_db_scrap(keyword) -> dict:
-    variables['keyword'] = keyword
+    variables["keyword"] = keyword
     data = await client.execute_async(query=query, variables=variables)
     return data

@@ -12,8 +12,11 @@ async def main():
     opens = []
     with open("keywords.yml", "r") as file:
         keywords = yaml.load(file, Loader=yaml.FullLoader)["keywords"]
-        for keyword in keywords:
-            data = await jobs_db_scrap(keyword=keyword)
+        tasks = await asyncio.gather(
+            *[jobs_db_scrap(keyword=keyword) for keyword in keywords]
+        )
+
+        for data in tasks:
             opens.append(data["data"]["jobs"]["total"])
 
     plt.bar(keywords, opens, color="maroon", width=0.4)
